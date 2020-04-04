@@ -34,9 +34,16 @@ class ProductsControllerTest {
     }
 
     @Test
-    void getProductById() throws Exception{
+    void getProductByNumber() throws Exception{
         mockMvc.perform(get(
                 "/products/" + "bpd-232123-342")
         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+    }
+
+    @Test
+    void listProducts() throws Exception {
+        mockMvc.perform(get(
+                "/products")
+                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 }
