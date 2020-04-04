@@ -3,6 +3,7 @@ package com.cleon.products.web.controller;
 import com.cleon.products.exception.CleonErrorObject;
 import com.cleon.products.services.IProductService;
 import com.cleon.products.web.model.ProductDto;
+import com.cleon.products.web.model.ProductPagedList;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,10 +11,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
@@ -25,32 +29,32 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "products", description = "The products API")
-public class ProductsController {
+@Slf4j
+public class ProductsController implements ProductsApi{
 
+    private static final Integer DEFAULT_PAGE_NUMBER = 0;
+    private static final Integer DEFAULT_PAGE_SIZE = 25;
     private final IProductService productService;
 
-    @Operation(
-            summary = "Find Product By id",
-            description = "Find the product for the given input product number",
-//            tags = {
-//                    "product"
-//            },
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Successful Operation",
-                            content = {
-                                    @Content(
-                                            schema = @Schema(implementation = ProductDto.class)
-                                    )
-                            }
-                    )
-            }
-    )
-    @GetMapping("/products/{productNumber}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable("productNumber") String productNumber){
+    public ResponseEntity<ProductDto> getProductByNumber(@PathVariable("productNumber") String productNumber){
         ProductDto productDto = productService.getProductByNumber(productNumber);
         return new ResponseEntity<>(productDto, HttpStatus.OK);
+    }
+
+    public ResponseEntity<ProductPagedList> listProducts(
+            @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "productName", required = false) String productName
+    ){
+        if(pageNumber == null || pageNumber < 0){
+            pageNumber = DEFAULT_PAGE_NUMBER;
+        }
+        if(pageSize == null || pageSize < 0){
+            pageSize = DEFAULT_PAGE_SIZE;
+        }
+        ProductPagedList productList = productService.listProducts(productName, PageRequest.of(pageNumber, pageSize));
+        log.info("Paged List:" + productList);
+        return new ResponseEntity<>(productList, HttpStatus.OK);
     }
 
     private ResponseEntity<CleonErrorObject> notFound(){

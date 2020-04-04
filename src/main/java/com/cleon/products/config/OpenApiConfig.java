@@ -21,7 +21,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI customConfiguration(){
         List<Server> serverList = new ArrayList<>();
-        serverList.add(new Server().url("http://dev.cleonproducts.com").description("Development Server"));
+        serverList.add(new Server().url("http://localhost:8080").description("Development Server"));
         serverList.add(new Server().url("http://qa.cleonproducts.com").description("QA Server"));
         serverList.add(new Server().url("http://prod.cleonproducts.com").description("Production Server"));
         return new OpenAPI()
