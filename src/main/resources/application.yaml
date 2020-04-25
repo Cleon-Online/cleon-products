@@ -6,4 +6,4 @@ spring:
     show-sql: true
 cleon:
   products:
-    inventory-service-host: 'http://localhost:8081'
+    inventory-service-host: 'http://cleon-products-inventory:8081'
