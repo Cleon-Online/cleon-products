@@ -2,6 +2,7 @@ package com.cleon.products.web.mapper;
 
 import com.cleon.products.domain.Product;
 import com.cleon.products.web.model.ProductDto;
+import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 
 /**
@@ -10,6 +11,7 @@ import org.mapstruct.Mapper;
  **/
 @Mapper(uses = {ProductTypeMapper.class,
                 DateMapper.class})
+@DecoratedWith(ProductMapperDecorator.class)
 public interface ProductMapper {
 
     ProductDto productToProductDto(Product product);

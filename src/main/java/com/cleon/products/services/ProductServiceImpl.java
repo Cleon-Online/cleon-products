@@ -41,6 +41,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public ProductPagedList listProducts(String productName, PageRequest pageRequest) {
+        log.info("Inside listProducts");
         ProductPagedList productPagedList;
         Page<Product> productPage;
         if(!StringUtils.isEmpty(productName)){
@@ -48,6 +49,7 @@ public class ProductServiceImpl implements IProductService {
         }else{
             productPage = productRepository.findAll(pageRequest);
         }
+        log.info("Product Info List: " + productPage.getContent().get(0));
         productPagedList = new ProductPagedList(
                 productPage.getContent()
                 .stream()

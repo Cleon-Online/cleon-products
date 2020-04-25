@@ -50,4 +50,7 @@ public class ProductDto {
     @NotBlank
     @NotNull
     private Long serialNumber;
+
+    @Positive
+    private Integer quantityOnHand;
 }

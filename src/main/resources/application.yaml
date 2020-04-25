@@ -4,3 +4,6 @@ spring:
       enabled: true
   jpa:
     show-sql: true
+cleon:
+  products:
+    inventory-service-host: 'http://localhost:8081'
