@@ -4,6 +4,19 @@ spring:
       enabled: true
   jpa:
     show-sql: true
+  profiles:
+    active: local
+
+---
+spring:
+  profiles: local
+cleon:
+  products:
+    inventory-service-host: 'http://localhost:8081'
+
+---
+spring:
+  profiles: cloud
 cleon:
   products:
     inventory-service-host: 'http://cleon-products-inventory:8081'
