@@ -15,5 +15,6 @@ import org.mapstruct.Mapper;
 public interface ProductMapper {
 
     ProductDto productToProductDto(Product product);
+    ProductDto productToProductDtoWithInventory(Product product);
     Product productDtoToProduct(ProductDto productDto);
 }

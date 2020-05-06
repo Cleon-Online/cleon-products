@@ -30,17 +30,22 @@ public class ProductServiceImpl implements IProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public ProductDto getProductByNumber(String productNumber) {
+    public ProductDto getProductByNumber(String productNumber, Boolean showInventory) {
         Product product = productRepository.findByProductNumber(productNumber);
         if(product == null){
             throw new ProductNotFoundException("Product Number: " + productNumber + "Not Found in the repository");
         }else{
-            return productMapper.productToProductDto(product);
+            if(showInventory){
+                return productMapper.productToProductDtoWithInventory(product);
+            }else{
+                return productMapper.productToProductDto(product);
+            }
+
         }
     }
 
     @Override
-    public ProductPagedList listProducts(String productName, PageRequest pageRequest) {
+    public ProductPagedList listProducts(String productName, Boolean showInventory, PageRequest pageRequest) {
         log.info("Inside listProducts");
         ProductPagedList productPagedList;
         Page<Product> productPage;
@@ -50,16 +55,30 @@ public class ProductServiceImpl implements IProductService {
             productPage = productRepository.findAll(pageRequest);
         }
         log.info("Product Info List: " + productPage.getContent().get(0));
-        productPagedList = new ProductPagedList(
-                productPage.getContent()
-                .stream()
-                .map(productMapper :: productToProductDto)
-                .collect(Collectors.toList()),
-                PageRequest.of(
-                        productPage.getPageable().getPageNumber(),
-                        productPage.getPageable().getPageSize()
-                ),
-                productPage.getTotalElements());
+        if(showInventory){
+            productPagedList = new ProductPagedList(
+                    productPage.getContent()
+                            .stream()
+                            .map(productMapper :: productToProductDtoWithInventory)
+                            .collect(Collectors.toList()),
+                    PageRequest.of(
+                            productPage.getPageable().getPageNumber(),
+                            productPage.getPageable().getPageSize()
+                    ),
+                    productPage.getTotalElements());
+        }else{
+            productPagedList = new ProductPagedList(
+                    productPage.getContent()
+                            .stream()
+                            .map(productMapper :: productToProductDto)
+                            .collect(Collectors.toList()),
+                    PageRequest.of(
+                            productPage.getPageable().getPageNumber(),
+                            productPage.getPageable().getPageSize()
+                    ),
+                    productPage.getTotalElements());
+        }
+
         return productPagedList;
     }
 }

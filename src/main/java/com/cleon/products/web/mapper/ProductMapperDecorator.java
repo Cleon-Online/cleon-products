@@ -33,6 +33,10 @@ public abstract class ProductMapperDecorator implements ProductMapper {
     }
 
     public ProductDto productToProductDto(Product product){
+        return productMapper.productToProductDto(product);
+    }
+
+    public ProductDto productToProductDtoWithInventory(Product product){
         ProductDto productDto = productMapper.productToProductDto(product);
         Integer productInventory = productInventoryService.getQuantityOnHand(product.getProductNumber());
         productDto.setQuantityOnHand(productInventory);

@@ -11,7 +11,7 @@ import org.springframework.data.domain.PageRequest;
  **/
 public interface IProductService {
 
-    ProductDto getProductByNumber(String productNumber);
+    ProductDto getProductByNumber(String productNumber, Boolean showInventory);
 
-    ProductPagedList listProducts(String productName, PageRequest of);
+    ProductPagedList listProducts(String productName, Boolean showInventory, PageRequest of);
 }
