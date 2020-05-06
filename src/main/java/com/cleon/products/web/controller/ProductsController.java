@@ -36,23 +36,37 @@ public class ProductsController implements ProductsApi{
     private static final Integer DEFAULT_PAGE_SIZE = 25;
     private final IProductService productService;
 
-    public ResponseEntity<ProductDto> getProductByNumber(@PathVariable("productNumber") String productNumber){
-        ProductDto productDto = productService.getProductByNumber(productNumber);
+    public ResponseEntity<ProductDto> getProductByNumber(@PathVariable("productNumber") String productNumber,
+                                                        @RequestParam(value = "showInventory", required = false) Boolean showInventory){
+        if(showInventory == null){
+            showInventory = false;
+        }else{
+            showInventory = true;
+        }
+        ProductDto productDto = productService.getProductByNumber(productNumber, showInventory);
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
     public ResponseEntity<ProductPagedList> listProducts(
             @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
-            @RequestParam(value = "productName", required = false) String productName
+            @RequestParam(value = "productName", required = false) String productName,
+            @RequestParam(value = "showInventory", required = false) Boolean showInventory
     ){
+        if(showInventory == null){
+            showInventory = false;
+        }else{
+            showInventory = true;
+        }
         if(pageNumber == null || pageNumber < 0){
             pageNumber = DEFAULT_PAGE_NUMBER;
         }
         if(pageSize == null || pageSize < 0){
             pageSize = DEFAULT_PAGE_SIZE;
         }
-        ProductPagedList productList = productService.listProducts(productName, PageRequest.of(pageNumber, pageSize));
+        ProductPagedList productList = productService.listProducts(productName,
+                showInventory,
+                PageRequest.of(pageNumber, pageSize));
         log.info("Paged List:" + productList);
         return new ResponseEntity<>(productList, HttpStatus.OK);
     }

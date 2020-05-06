@@ -38,7 +38,8 @@ public interface ProductsApi {
             }
     )
     @GetMapping(value = "/products/{productNumber}",produces = {"application/json"})
-    ResponseEntity<ProductDto> getProductByNumber(@PathVariable("productNumber") String productNumber);
+    ResponseEntity<ProductDto> getProductByNumber(@PathVariable("productNumber") String productNumber,
+                                                  @RequestParam(value = "showInventory", required = false) Boolean showInventory);
 
     @Operation(
             summary = "Search products",
@@ -62,6 +63,7 @@ public interface ProductsApi {
     ResponseEntity<ProductPagedList> listProducts(
             @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
-            @RequestParam(value = "productName", required = false) String productName
+            @RequestParam(value = "productName", required = false) String productName,
+            @RequestParam(value = "showInventory", required = false) Boolean showInventory
     );
 }
