@@ -7,13 +7,16 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * vbala created on 4/4/2020
  * Inside the package - com.cleon.products.web.model
  **/
-public class ProductPagedList extends PageImpl<ProductDto> {
+public class ProductPagedList extends PageImpl<ProductDto> implements Serializable {
+
+    static final long serialVersionUID = -5867588157920173924L;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public ProductPagedList(@JsonProperty("content") List<ProductDto> content,

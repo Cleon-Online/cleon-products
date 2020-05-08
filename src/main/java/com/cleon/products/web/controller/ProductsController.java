@@ -38,10 +38,8 @@ public class ProductsController implements ProductsApi{
 
     public ResponseEntity<ProductDto> getProductByNumber(@PathVariable("productNumber") String productNumber,
                                                         @RequestParam(value = "showInventory", required = false) Boolean showInventory){
-        if(showInventory == null){
+        if(showInventory == null) {
             showInventory = false;
-        }else{
-            showInventory = true;
         }
         ProductDto productDto = productService.getProductByNumber(productNumber, showInventory);
         return new ResponseEntity<>(productDto, HttpStatus.OK);
@@ -55,8 +53,6 @@ public class ProductsController implements ProductsApi{
     ){
         if(showInventory == null){
             showInventory = false;
-        }else{
-            showInventory = true;
         }
         if(pageNumber == null || pageNumber < 0){
             pageNumber = DEFAULT_PAGE_NUMBER;
