@@ -3,6 +3,7 @@ package com.cleon.products.web.model;
 import lombok.*;
 
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -17,7 +18,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @ToString
-public class ProductDto {
+public class ProductDto implements Serializable {
+
+    static final long serialVersionUID = 5420301235582063315L;
 
     @Null
     private String productNumber;

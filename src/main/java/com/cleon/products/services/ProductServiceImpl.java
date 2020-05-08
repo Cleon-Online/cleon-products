@@ -8,6 +8,7 @@ import com.cleon.products.web.model.ProductDto;
 import com.cleon.products.web.model.ProductPagedList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,10 @@ public class ProductServiceImpl implements IProductService {
 
     private final ProductMapper productMapper;
 
+    @Cacheable(cacheNames = "productCache", key = "#productNumber", condition = "#showInventory == false")
     @Override
     public ProductDto getProductByNumber(String productNumber, Boolean showInventory) {
+        log.info("Get Product By Number Service was called: ShowInventory: {}", showInventory);
         Product product = productRepository.findByProductNumber(productNumber);
         if(product == null){
             throw new ProductNotFoundException("Product Number: " + productNumber + "Not Found in the repository");
@@ -44,9 +47,10 @@ public class ProductServiceImpl implements IProductService {
         }
     }
 
+    @Cacheable(cacheNames = "productListCache", condition = "#showInventory == false ")
     @Override
     public ProductPagedList listProducts(String productName, Boolean showInventory, PageRequest pageRequest) {
-        log.info("Inside listProducts");
+        log.info("ListProducts Service was called: Show Inventory:" + showInventory);
         ProductPagedList productPagedList;
         Page<Product> productPage;
         if(!StringUtils.isEmpty(productName)){
