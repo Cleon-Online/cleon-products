@@ -27,8 +27,8 @@ spring:
   profiles: qa
   datasource:
     url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
-    username: CLEON_SERVICE
-    password: CLEON_SERVICE
+    username: CLEON_PRODUCTS
+    password: CLEON_PRODUCTS
   jpa:
     hibernate:
       ddl-auto: none

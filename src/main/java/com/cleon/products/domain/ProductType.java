@@ -22,7 +22,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(schema = "CLEON_PRODUCTS")
+//@Table(schema = "CLEON_PRODUCTS")
 public class ProductType {
 
     /**
@@ -32,7 +32,7 @@ public class ProductType {
     //@GeneratedValue(generator = "UUID")
     //@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_type_sequence")
-    @SequenceGenerator(name="product_type_sequence", sequenceName = "product_type_seq", schema = "CLEON_PRODUCTS",
+    @SequenceGenerator(name="product_type_sequence", sequenceName = "product_type_seq", //schema = "CLEON_PRODUCTS",
             initialValue = 20001, allocationSize = 1)
     @Column(updatable = false, nullable = false)
     private Long productTypeId;
