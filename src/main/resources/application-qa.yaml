@@ -1,0 +1,15 @@
+# The qa profile will use
+# 1. localhost to connect to inventory service
+# 2. Oracle database for storing data
+spring:
+  profiles: qa
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
+    username: CLEON_PRODUCTS
+    password: CLEON_PRODUCTS
+  jpa:
+    hibernate:
+      ddl-auto: none
+cleon:
+  products:
+    inventory-service-host: 'http://localhost:8081'

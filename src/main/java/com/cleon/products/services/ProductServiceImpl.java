@@ -35,6 +35,9 @@ public class ProductServiceImpl implements IProductService {
     public ProductDto getProductByNumber(String productNumber, Boolean showInventory) {
         log.info("Get Product By Number Service was called: ShowInventory: {}", showInventory);
         Product product = productRepository.findByProductNumber(productNumber);
+        log.info("Product Name: {}", product.getProductName());
+        log.info("Product Type: {}", product.getProductType().getProductTypeName());
+        log.info("Product Category: {}", product.getProductType().getProductCategory().getProductCategoryName());
         if(product == null){
             throw new ProductNotFoundException("Product Number: " + productNumber + "Not Found in the repository");
         }else{
