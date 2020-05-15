@@ -14,13 +14,6 @@ import java.util.UUID;
 @Component
 public class ProductTypeMapper {
 
-    public String asString(ProductType productType){
-        if(productType != null){
-            return productType.getProductTypeName();
-        }else{
-            return null;
-        }
-    }
     public ProductType asProductType(String productType){
         ProductCategory productCategory = ProductCategory.builder()
                 .productCategoryId(9832442L)

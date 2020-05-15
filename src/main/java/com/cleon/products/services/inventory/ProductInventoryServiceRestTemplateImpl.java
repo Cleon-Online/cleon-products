@@ -25,7 +25,7 @@ import java.util.List;
 @Component
 public class ProductInventoryServiceRestTemplateImpl implements IProductInventoryService{
 
-    private final String INVENTORY_PATH = "/product/{productNumber}/inventory";
+    private final String INVENTORY_PATH = "/products/{productNumber}/inventory";
 
     private RestTemplate restTemplate;
 
