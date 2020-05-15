@@ -11,13 +11,14 @@ create sequence product_sequence start with 30001 increment by 1;
 create sequence product_type_seq start with 20001 increment by 1;
 
 create table product (product_id number not null, 
-created_date timestamp, 
-last_modified_date timestamp, 
-product_name varchar(100) not null, 
-product_number varchar(100) not null, 
-product_price number(8,2) not null, 
-serial_number varchar(100) not null, 
-product_type_id NUMBER not null, 
+    created_date timestamp,
+    last_modified_date timestamp,
+    product_name varchar(100) not null,
+    product_number varchar(100) not null,
+    product_description varchar(500) null,
+    product_price number(8,2) not null,
+    serial_number varchar(100) not null,
+    product_type_id NUMBER not null,
 primary key (product_id));
 
 
