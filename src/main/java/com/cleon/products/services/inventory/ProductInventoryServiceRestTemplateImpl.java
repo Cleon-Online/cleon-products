@@ -21,8 +21,8 @@ import java.util.List;
  * Created Time: 7:49 PM
  **/
 @Slf4j
-@ConfigurationProperties(prefix = "cleon.products", ignoreUnknownFields = false)
-@Component
+//@ConfigurationProperties(prefix = "cleon.products", ignoreUnknownFields = false)
+//@Component
 public class ProductInventoryServiceRestTemplateImpl implements IProductInventoryService{
 
     private final String INVENTORY_PATH = "/products/{productNumber}/inventory";
