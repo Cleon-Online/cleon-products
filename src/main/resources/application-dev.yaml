@@ -1,8 +1,0 @@
-# The dev profile will use
-# 1. localhost to connect to inventory service
-# 2. H2 In memory database for storing data
-spring:
-  profiles: dev
-cleon:
-  products:
-    inventory-service-host: 'http://localhost:8081'
