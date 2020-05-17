@@ -39,7 +39,7 @@ class ProductDtoTest {
                 .productCategory("Electronics")
                 .productDescription("This is an awesome phone")
                 .productPrice(new BigDecimal(1099.99))
-                .serialNumber(12332345L)
+                .serialNumber("csdfsdfg34werw")
                 .createdDate(OffsetDateTime.now())
                 .lastModifiedDate(OffsetDateTime.now())
                 .build();

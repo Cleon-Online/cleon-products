@@ -52,7 +52,7 @@ public class ProductDto implements Serializable {
 
     @NotBlank
     @NotNull
-    private Long serialNumber;
+    private String serialNumber;
 
     @Positive
     private Integer quantityOnHand;

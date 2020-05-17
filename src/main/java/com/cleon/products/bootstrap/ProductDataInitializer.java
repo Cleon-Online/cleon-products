@@ -18,6 +18,7 @@ import java.math.BigDecimal;
  * vbala created on 3/23/2020
  * Inside the package - com.cleon.products.bootstrap
  **/
+@Profile("dev")
 @RequiredArgsConstructor
 @Component
 @Slf4j

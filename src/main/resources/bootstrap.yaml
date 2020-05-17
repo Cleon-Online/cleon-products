@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      discovery:
+        service-id: cleon-config-server
+  application:
+    name: cleon-products
+  profiles:
+    active: dev

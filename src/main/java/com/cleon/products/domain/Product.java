@@ -71,7 +71,7 @@ public class Product {
      * The serial number of the product
      */
     @NotBlank
-    @Column(length = 25, columnDefinition = "varchar", nullable = false, unique = true)
+    @Column(length = 100, columnDefinition = "varchar", nullable = false, unique = true)
     private String serialNumber;
 
     /**
